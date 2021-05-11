@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] EnemyMovement enemyPrefab;
     [SerializeField] Transform enemyParentTransform;
     [SerializeField] Text spawnedEnemies;
+    [SerializeField] AudioClip spawnedEnemySFX;
     int score = 0;
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             AddScore();
+            GetComponent<AudioSource>().PlayOneShot(spawnedEnemySFX);
             var newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             newEnemy.transform.parent = enemyParentTransform;
             yield return new WaitForSeconds(secondsBetweenSpawns);
